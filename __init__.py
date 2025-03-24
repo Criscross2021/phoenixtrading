@@ -1,9 +1,5 @@
-from trytond.pool import Pool
-from . import models
+from .trade import TradeTerm
+from .sale import Sale
+from .cost import CostBreakdown
 
-def register():
-    Pool.register(
-        models.TradeTerm,
-        models.Sale,
-        models.CostBreakdown,
-        module='comerciointl_module', type_='model')
+__all__ = ['TradeTerm', 'Sale', 'CostBreakdown']

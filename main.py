@@ -40,91 +40,119 @@ class MainApp:
         self.notebook = ttk.Notebook(root)
         self.notebook.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
+        # Initialize the CommodityTrade class FIRST
+        self.trade = CommodityTrade()
+
         # Main Frame (Tab 1)
         self.main_frame = ttk.Frame(self.notebook, padding="10")
         self.notebook.add(self.main_frame, text="Main")
 
-        # Configure the main_frame's grid to expand
-        self.main_frame.grid_rowconfigure(0, weight=1)  # Make row 0 expandable
-        self.main_frame.grid_columnconfigure(0, weight=1)  # Make column 0 expandable
+        # Configure the main_frame's grid
+        self.main_frame.grid_rowconfigure(0, weight=1)
+        self.main_frame.grid_columnconfigure(0, weight=1)
 
-        # Add a canvas and scrollbar to main_frame
-        self.canvas = tk.Canvas(self.main_frame)
-        self.canvas.grid(row=0, column=0, sticky="nsew")
+        # Create content frame (no scrollbar)
+        self.content_frame = ttk.Frame(self.main_frame, style="White.TFrame")
+        self.content_frame.grid(row=0, column=0, sticky="nsew")
 
-        # Add a vertical scrollbar
-        self.scrollbar = ttk.Scrollbar(self.main_frame, orient="vertical", command=self.canvas.yview)
-        self.scrollbar.grid(row=0, column=1, sticky="ns")
-
-        # Configure the canvas
-        self.canvas.configure(yscrollcommand=self.scrollbar.set)
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        )
-
-        # Create a frame inside the canvas
-        self.scrollable_frame = ttk.Frame(self.canvas)
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-
-        # Initialize the SaleManager in the Sale Details tab
-        self.sale_details_frame = ttk.Frame(self.notebook, padding="10")
-        self.notebook.add(self.sale_details_frame, text="Sale Details")
-        self.sale_manager = SaleManager(self.sale_details_frame)
-        self.sale_manager.create_sale_details_frame()
-
-        # Initialize the DisplayFrame in the Main tab
+        # Initialize DisplayFrame
         self.display_frame = DisplayFrame(
             self.main_frame,
             calculate_costs_callback=self.calculate_costs,
             reset_fields_callback=self.reset_fields
         )
 
-        # Initialize the CommodityTrade class
-        self.trade = CommodityTrade()
-
-        # Initialize the CommoditySelection in the Main tab
+        # Initialize components in content_frame
         self.commodity_selection = CommoditySelection(
-            self.scrollable_frame,
+            self.content_frame,
             self.update_units,
-            self.trade.UNIT_CONVERSIONS  # Pass the UNIT_CONVERSIONS dictionary
+            self.trade.UNIT_CONVERSIONS
         )
 
-        # Initialize the CostInput in the Main tab
-        self.cost_input = CostInput(self.scrollable_frame, self.validate_input_func, self.trade)
+        self.cost_input = CostInput(
+            self.content_frame,
+            self.validate_input_func,
+            self.trade
+        )
 
-        # Initialize the TradeTerm in the Main tab
-        self.trade_term = TradeTerm(self.scrollable_frame, self.update_input_boxes)
+        self.trade_term = TradeTerm(
+            self.content_frame,
+            self.update_input_boxes
+        )
 
-        # Initialize the Additional Costs Frame under the Display Frame
-        self.additional_costs_frame = AdditionalCostsFrame(self.main_frame, self.validate_input_func)
-        self.additional_costs_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)  # Place it below the Display Frame
+        # Initialize SaleManager in Sale Details tab
+        self.sale_details_frame = ttk.Frame(self.notebook, padding="10")
+        self.notebook.add(self.sale_details_frame, text="Sale Details")
+        self.sale_manager = SaleManager(self.sale_details_frame)
+        self.sale_manager.create_sale_details_frame()
+
+        # Additional Costs Frame
+        self.additional_costs_frame = AdditionalCostsFrame(
+            self.main_frame,
+            self.validate_input_func
+        )
+        self.additional_costs_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
     def configure_styles(self):
         """Configure the styles for the application."""
-        # Use the instance variable self.style
+        # Frame and label styles
         self.style.configure("White.TFrame", background="white")
-        self.style.configure("White.TLabel", background="white", font=("Arial", 11), foreground="black")
-        self.style.configure("GroupTitle.TLabel", background="white", font=("Arial", 10, "bold"), foreground="black")
-        self.style.configure("White.TEntry", background="white", font=("Arial", 11), foreground="black")
-        self.style.configure("Bold.TLabel", background="white", font=("Arial", 11, "bold"), foreground="red")
+        self.style.configure("White.TLabel",
+                             background="white",
+                             font=("Arial", 11),
+                             foreground="black")
+        self.style.configure("GroupTitle.TLabel",
+                             background="white",
+                             font=("Arial", 10, "bold"),
+                             foreground="black")
+        self.style.configure("White.TEntry",
+                             background="white",
+                             font=("Arial", 11),
+                             foreground="black")
+        self.style.configure("Bold.TLabel",
+                             background="white",
+                             font=("Arial", 11, "bold"),
+                             foreground="red")
 
-        # Default button style
-        self.style.configure("TButton", background="lightgray", foreground="black")
+        # Additional Costs Frame style
+        self.style.configure("AdditionalCosts.TLabel",
+                             background="white",
+                             font=("Arial", 11),
+                             foreground="black")
 
-        # Style for selected button
-        self.style.configure("Selected.TButton", background="lightblue", foreground="black")
+        # Button styles
+        self.style.configure("TButton",
+                             background="#e0e0e0",
+                             foreground="black",
+                             font=("Arial", 11),
+                             padding=6,
+                             relief="groove",
+                             focuscolor="#4a7dc9")  # Focus color added here
 
-        # Map the styles to the button states
+        self.style.configure("Selected.TButton",
+                             background="#4a7dc9",
+                             foreground="white",
+                             relief="sunken",
+                             focuscolor="#3a6cb5")  # Darker focus color for selected
+
+        # Hover and focus effects
         self.style.map("TButton",
-                      background=[("active", "lightblue")],  # Change color when hovered
-                      foreground=[("active", "black")])
+                       background=[("active", "#d0d0d0"), ("focus", "#e0e0e0")],
+                       relief=[("pressed", "sunken"), ("!pressed", "groove")],
+                       focuscolor=[("focus", "#4a7dc9"), ("!focus", "")])  # Focus ring control
 
-        self.style.map("Selected.TButton",
-                      background=[("active", "lightblue")],  # Keep the same color when hovered
-                      foreground=[("active", "black")])
+        # Combobox styles
+        self.style.configure("TCombobox.Button",
+                             background="#4a7dc9",
+                             padding=5,
+                             focuscolor="#3a6cb5")
 
     def load_logo(self):
+        self.style.configure("Transparent.TLabel",
+                             background="white",
+                             borderwidth=0,
+                             padding=0)
+
         """Load and display the logo in the root window."""
         logo_path = "/Users/user/PycharmProjects/ComercioIntl/logo_frame/phoenixlogo.png"  # Update this path
         logo = Logo(self.root, logo_path)
@@ -135,7 +163,7 @@ class MainApp:
         """Calculate the total costs and update the display frame."""
         try:
             # Retrieve quantity and other inputs
-            quantity = float(self.sale_manager.entry_quantity.get())
+            quantity = self.commodity_selection.get_quantity()
             costs = self.get_cost_entries()
 
             # Retrieve additional costs from the AdditionalCostsFrame
@@ -211,4 +239,5 @@ class MainApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = MainApp(root)
+
     root.mainloop()

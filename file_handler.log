@@ -1,0 +1,88 @@
+2025-03-16 21:21:44,815 - INFO - Using cached exchange rates.
+2025-03-16 21:23:13,531 - INFO - Sale saved to sales/_2025-03-16_.csv
+2025-03-16 21:42:34,021 - INFO - Using cached exchange rates.
+2025-03-16 21:53:08,529 - INFO - Using cached exchange rates.
+2025-03-16 21:53:50,296 - INFO - Using cached exchange rates.
+2025-03-16 21:54:13,583 - INFO - Using cached exchange rates.
+2025-03-16 21:56:30,355 - INFO - Using cached exchange rates.
+2025-03-16 22:02:57,343 - INFO - Using cached exchange rates.
+2025-03-16 22:04:51,785 - INFO - Using cached exchange rates.
+2025-03-16 22:12:07,609 - INFO - Using cached exchange rates.
+2025-03-16 22:14:29,138 - INFO - Using cached exchange rates.
+2025-03-16 22:15:43,391 - INFO - Using cached exchange rates.
+2025-03-16 22:15:56,248 - INFO - Using cached exchange rates.
+2025-03-16 22:20:39,183 - INFO - Using cached exchange rates.
+2025-03-16 22:24:51,194 - INFO - Using cached exchange rates.
+2025-03-16 22:25:41,190 - INFO - Using cached exchange rates.
+2025-03-16 22:30:06,404 - INFO - Using cached exchange rates.
+2025-03-16 22:31:13,364 - INFO - Using cached exchange rates.
+2025-03-16 22:35:10,394 - INFO - Using cached exchange rates.
+2025-03-16 22:36:08,638 - INFO - Using cached exchange rates.
+2025-03-16 22:38:38,804 - INFO - Using cached exchange rates.
+2025-03-16 22:47:13,408 - INFO - Using cached exchange rates.
+2025-03-16 22:50:31,394 - INFO - Using cached exchange rates.
+2025-03-16 22:54:59,550 - INFO - Using cached exchange rates.
+2025-03-16 23:01:58,462 - INFO - Using cached exchange rates.
+2025-03-16 23:04:54,574 - INFO - Using cached exchange rates.
+2025-03-16 23:09:15,127 - INFO - Using cached exchange rates.
+2025-03-16 23:10:06,387 - INFO - Using cached exchange rates.
+2025-03-16 23:18:38,659 - INFO - Using cached exchange rates.
+2025-03-16 23:59:46,005 - INFO - Using cached exchange rates.
+2025-03-17 00:51:45,361 - INFO - Using cached exchange rates.
+2025-03-17 00:54:40,932 - INFO - Using cached exchange rates.
+2025-03-17 01:15:18,271 - INFO - Using cached exchange rates.
+2025-03-17 01:30:12,256 - INFO - Using cached exchange rates.
+2025-03-17 01:41:15,760 - INFO - Using cached exchange rates.
+2025-03-17 01:48:35,095 - INFO - Using cached exchange rates.
+2025-03-17 01:55:49,604 - INFO - Using cached exchange rates.
+2025-03-17 02:00:55,651 - INFO - Using cached exchange rates.
+2025-03-17 02:05:06,918 - INFO - Using cached exchange rates.
+2025-03-17 02:05:45,427 - INFO - Using cached exchange rates.
+2025-03-17 02:08:55,317 - INFO - Using cached exchange rates.
+2025-03-17 02:12:28,758 - INFO - Using cached exchange rates.
+2025-03-17 02:30:39,121 - INFO - Using cached exchange rates.
+2025-03-17 02:39:08,695 - INFO - Using cached exchange rates.
+2025-03-17 04:51:43,201 - INFO - Fetching exchange rates for 2025-03-17
+2025-03-17 04:51:43,822 - WARNING - No data available for 2025-03-17 for BRL. Using fallback rates.
+2025-03-17 04:51:46,586 - WARNING - No data available for 2025-03-17 for CNY. Using fallback rates.
+2025-03-17 04:51:47,587 - INFO - Successfully fetched exchange rates from Alpha Vantage.
+2025-03-17 04:51:47,594 - INFO - Exchange rates cached.
+2025-03-17 05:25:32,573 - INFO - Using cached exchange rates.
+2025-03-17 05:27:41,715 - INFO - Using cached exchange rates.
+2025-03-17 05:31:27,742 - INFO - Using cached exchange rates.
+2025-03-17 05:35:35,355 - INFO - Using cached exchange rates.
+2025-03-17 05:35:46,929 - INFO - Using cached exchange rates.
+2025-03-17 05:35:57,305 - INFO - Using cached exchange rates.
+2025-03-17 05:38:20,738 - INFO - Using cached exchange rates.
+2025-03-17 05:52:39,029 - INFO - Using cached exchange rates.
+2025-03-17 06:03:37,915 - INFO - Using cached exchange rates.
+2025-03-17 06:05:55,877 - INFO - Using cached exchange rates.
+2025-03-17 06:11:13,958 - INFO - Using cached exchange rates.
+2025-03-17 06:15:42,046 - INFO - Using cached exchange rates.
+2025-03-17 06:32:56,408 - INFO - Using cached exchange rates.
+2025-03-17 13:47:20,008 - INFO - Using cached exchange rates.
+2025-03-17 13:49:23,331 - INFO - Using cached exchange rates.
+2025-03-17 14:56:57,822 - INFO - Using cached exchange rates.
+2025-03-17 15:44:32,392 - INFO - Using cached exchange rates.
+2025-03-17 15:50:33,317 - INFO - Using cached exchange rates.
+2025-03-17 16:28:16,177 - INFO - Using cached exchange rates.
+2025-03-17 16:30:23,855 - INFO - Using cached exchange rates.
+2025-03-17 17:08:51,548 - INFO - Using cached exchange rates.
+2025-03-17 17:13:29,266 - INFO - Using cached exchange rates.
+2025-03-17 17:25:47,979 - INFO - Using cached exchange rates.
+2025-03-17 17:30:25,241 - INFO - Using cached exchange rates.
+2025-03-17 17:54:30,089 - INFO - Using cached exchange rates.
+2025-03-17 17:55:33,620 - INFO - Using cached exchange rates.
+2025-03-17 17:56:32,036 - INFO - Using cached exchange rates.
+2025-03-18 15:05:04,847 - INFO - Fetching exchange rates for 2025-03-18
+2025-03-18 15:05:09,932 - WARNING - No data available for 2025-03-18 for CNY. Using fallback rates.
+2025-03-18 15:05:10,933 - INFO - Successfully fetched exchange rates from Alpha Vantage.
+2025-03-18 15:05:10,940 - INFO - Exchange rates cached.
+2025-03-20 11:20:42,031 - INFO - Fetching exchange rates for 2025-03-20
+2025-03-20 11:20:45,501 - WARNING - No data available for 2025-03-20 for CNY. Using fallback rates.
+2025-03-20 11:20:46,501 - INFO - Successfully fetched exchange rates from Alpha Vantage.
+2025-03-20 11:20:46,503 - INFO - Exchange rates cached.
+2025-03-23 13:36:34,705 - INFO - Fetching exchange rates for 2025-03-21
+2025-03-23 13:36:39,082 - INFO - Successfully fetched exchange rates from Alpha Vantage.
+2025-03-23 13:36:39,085 - INFO - Exchange rates cached.
+2025-03-23 13:38:54,996 - INFO - Using cached exchange rates.

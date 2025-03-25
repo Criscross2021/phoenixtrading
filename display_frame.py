@@ -1,97 +1,83 @@
 import tkinter as tk
 from tkinter import ttk
 
-class DisplayFrame:
-    def __init__(self, root, calculate_costs_callback, reset_fields_callback):
+class AdditionalCostsFrame(ttk.Frame):
+    def __init__(self, parent, validate_input_func):
+        super().__init__(parent, style="White.TFrame")
         """
-        Initialize the DisplayFrame class.
+        Initialize the AdditionalCostsFrame.
 
         Args:
-            root (tk.Tk): The root window or frame where the display frame will be placed.
-            calculate_costs_callback (function): Callback function for the Calculate Costs button.
-            reset_fields_callback (function): Callback function for the Reset button.
+            parent: The parent widget (usually a notebook tab).
+            validate_input_func: Function to validate input in the cost fields.
         """
-        self.root = root
-        self.calculate_costs_callback = calculate_costs_callback
-        self.reset_fields_callback = reset_fields_callback
+        self.validate_input_func = validate_input_func
+        self.cost_entries = {}
 
-        # Create the display frame
-        self.frame = ttk.Frame(root, style="White.TFrame")  # Renamed to self.frame
-        self.frame.grid(row=0, column=2, rowspan=50, sticky="nse", padx=10, pady=10)
+        # Create input fields for additional costs
+        self.create_additional_costs_fields()
 
-        # Result Table
-        self.result_table = ttk.Treeview(
-            self.frame,  # Use self.frame instead of self.display_frame
-            columns=("Cost Component", "Amount (USD)"),
-            show="headings"
+    def create_additional_costs_fields(self):
+        """Create input fields for additional costs."""
+        # Profit Sharing
+        profit_sharing_label = ttk.Label(
+            self,
+            text="Profit Sharing (USD/MT):",
+            style="AdditionalCosts.TLabel"  # Use our new consistent style
         )
-        self.result_table.heading("Cost Component", text="Cost Component")
-        self.result_table.heading("Amount (USD)", text="Amount (USD)")
-        self.result_table.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        profit_sharing_label.grid(row=0, column=0, sticky=tk.W, padx=5, pady=5)
 
-        # Total Costs Frame
-        self.total_costs_frame = ttk.Frame(self.frame, style="White.TFrame")  # Use self.frame
-        self.total_costs_frame.pack(side=tk.TOP, padx=2)
+        profit_sharing_entry = ttk.Entry(self, width=10, validate="key", validatecommand=(self.validate_input_func, "%P"))
+        profit_sharing_entry.grid(row=0, column=1, sticky=tk.W, padx=5, pady=5)
+        self.cost_entries["profit_sharing"] = profit_sharing_entry
 
-        # Total Cost Labels
-        self.total_cost_usd_label = ttk.Label(self.total_costs_frame, text="Total Cost (USD):", style="Bold.TLabel")
-        self.total_cost_usd_label.pack()
-        self.total_cost_usd_value = ttk.Label(self.total_costs_frame, text="0.00", style="Bold.TLabel")
-        self.total_cost_usd_value.pack()
+        profit_sharing_label = ttk.Label(
+            self,
+            text="Profit Sharing (USD/MT):",
+            style="AdditionalCosts.TLabel"  # Use our new consistent style
+        )
+        profit_sharing_label.grid(row=1, column=0, sticky=tk.W, padx=5, pady=5)
+        profit_sharing_brl_entry = ttk.Entry(self, width=10, validate="key", validatecommand=(self.validate_input_func, "%P"))
+        profit_sharing_brl_entry.grid(row=1, column=1, sticky=tk.W, padx=5, pady=5)
+        self.cost_entries["profit_sharing_brl_per_sack"] = profit_sharing_brl_entry
 
-        self.total_cost_brl_label = ttk.Label(self.total_costs_frame, text="Total Cost (BRL):", style="Bold.TLabel")
-        self.total_cost_brl_label.pack()
-        self.total_cost_brl_value = ttk.Label(self.total_costs_frame, text="0.00", style="Bold.TLabel")
-        self.total_cost_brl_value.pack()
+        # Commodity Trader Commission
+        commodity_trader_label = ttk.Label(
+            self,
+            text="Commodity Trader Commission (USD/MT):",
+            style="AdditionalCosts.TLabel"
+        ) # Use our new consistent style
 
-        self.total_cost_eur_label = ttk.Label(self.total_costs_frame, text="Total Cost (EUR):", style="Bold.TLabel")
-        self.total_cost_eur_label.pack()
-        self.total_cost_eur_value = ttk.Label(self.total_costs_frame, text="0.00", style="Bold.TLabel")
-        self.total_cost_eur_value.pack()
 
-        self.total_cost_yuan_label = ttk.Label(self.total_costs_frame, text="Total Cost (CNY):", style="Bold.TLabel")
-        self.total_cost_yuan_label.pack()
-        self.total_cost_yuan_value = ttk.Label(self.total_costs_frame, text="0.00", style="Bold.TLabel")
-        self.total_cost_yuan_value.pack()
+        commodity_trader_label.grid(row=2, column=0, sticky=tk.W, padx=5, pady=5)
+        commodity_trader_entry = ttk.Entry(self, width=10, validate="key", validatecommand=(self.validate_input_func, "%P"))
+        commodity_trader_entry.grid(row=2, column=1, sticky=tk.W, padx=5, pady=5)
+        self.cost_entries["commodity_trader_commission"] = commodity_trader_entry
 
-        # Buttons Frame
-        self.buttons_frame = ttk.Frame(self.frame, style="White.TFrame")  # Use self.frame
-        self.buttons_frame.pack(side=tk.TOP, pady=5)
+        # Ship Broker Commission
+        ship_broker_label = ttk.Label(
+            self,
+            text="Ship Broker Commission (USD):",
+            style="AdditionalCosts.TLabel"  # Use our new consistent style
+        )
 
-        # Calculate Button
-        self.calculate_button = ttk.Button(self.buttons_frame, text="Calculate Costs", command=self.calculate_costs_callback)
-        self.calculate_button.pack(side=tk.LEFT, padx=3)
+        ship_broker_label.grid(row=3, column=0, sticky=tk.W, padx=5, pady=5)
+        ship_broker_entry = ttk.Entry(self, width=10, validate="key", validatecommand=(self.validate_input_func, "%P"))
+        ship_broker_entry.grid(row=3, column=1, sticky=tk.W, padx=5, pady=5)
+        self.cost_entries["ship_broker_commission"] = ship_broker_entry
 
-        # Reset Button
-        self.reset_button = ttk.Button(self.buttons_frame, text="Reset", command=self.reset_fields_callback)
-        self.reset_button.pack(side=tk.BOTTOM, padx=5)
-
-    def update_result_table(self, cost_breakdown):
-        """
-        Update the result table with the cost breakdown.
-
-        Args:
-            cost_breakdown (dict): A dictionary containing the cost breakdown.
-        """
-        # Clear existing rows
-        for row in self.result_table.get_children():
-            self.result_table.delete(row)
-
-        # Insert new rows
-        for field_name, value in cost_breakdown.items():
-            self.result_table.insert("", "end", values=(field_name, f"{value:.2f}"))
-
-    def update_total_costs(self, total_cost_usd, total_cost_brl, total_cost_eur, total_cost_yuan):
-        """
-        Update the total cost labels.
-
-        Args:
-            total_cost_usd (float): Total cost in USD.
-            total_cost_brl (float): Total cost in BRL.
-            total_cost_eur (float): Total cost in EUR.
-            total_cost_yuan (float): Total cost in CNY.
-        """
-        self.total_cost_usd_value.config(text=f"{total_cost_usd:.2f}")
-        self.total_cost_brl_value.config(text=f"{total_cost_brl:.2f}")
-        self.total_cost_eur_value.config(text=f"{total_cost_eur:.2f}")
-        self.total_cost_yuan_value.config(text=f"{total_cost_yuan:.2f}")
+    def get_additional_costs(self):
+        """Retrieve values from additional cost entries."""
+        additional_costs = {}
+        for field_name, entry_widget in self.cost_entries.items():
+            value = entry_widget.get()
+            if value == "N/A":
+                additional_costs[field_name] = 0.0  # Treat "N/A" as 0
+            else:
+                try:
+                    additional_costs[field_name] = float(value) if value else 0.0  # Treat empty fields as 0
+                except ValueError:
+                    # Handle invalid input (e.g., non-numeric characters)
+                    additional_costs[field_name] = 0.0
+                    print(f"Invalid input for {field_name}: {value}")
+        return additional_costs
